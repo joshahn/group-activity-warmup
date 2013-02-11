@@ -1,10 +1,10 @@
-var SUCCESS               =   1  # : a success
-var ERR_BAD_CREDENTIALS   =  -1  # : (for login only) cannot find the user/password pair in the database
-var ERR_USER_EXISTS       =  -2  # : (for add only) trying to add a user that already exists
-var ERR_BAD_USERNAME      =  -3  # : (for add, or login) invalid user name (only empty string is invalid for now)
-var ERR_BAD_PASSWORD      =  -4
+var SUCCESS               =   1;
+var ERR_BAD_CREDENTIALS   =  -1;
+var ERR_USER_EXISTS       =  -2;
+var ERR_BAD_USERNAME      =  -3;
+var ERR_BAD_PASSWORD      =  -4;
 
-UsersModels = function() {};
+UsersModel = function() {};
 
 var MAX_USERNAME_LENGTH = 128;
 var MAX_PASSWORD_LENGTH = 128;
@@ -13,7 +13,7 @@ var pg = require('pg');
 var connection = new pg.Client(process.env.HEROKU_POSTGRESQL_CHARCOAL_URL);
 connection.connect();
 
-UsersModels.prototype.login = function(user, password, callback) {
+UsersModel.prototype.login = function(user, password, callback) {
   
   var userQuery = client.query('SELECT * FROM testdb WHERE username = $u', [user]);
   
@@ -37,7 +37,7 @@ UsersModels.prototype.login = function(user, password, callback) {
   callback(null, count);
 }
 
-UsersModels.prototype.add = function(name, password, callback) {
+UsersModel.prototype.add = function(name, password, callback) {
   var userQuery = client.query('SELECT * FROM testdb WHERE username = $u', [name]);
   query.on('row', function(row) {
     var username = row.username;
@@ -48,7 +48,7 @@ UsersModels.prototype.add = function(name, password, callback) {
   if (username != null) {
     return ERR_USER_EXISTS;
   }
-  if ((name == "") && (name.length > MAX_USERNAME_LENGTH) {
+  if ((name == "") && (name.length > MAX_USERNAME_LENGTH)) {
     return ERR_BAD_USERNAME;
   }
   if (psswrd.length <= MAX_PASSWORD_LENGTH) {
@@ -59,7 +59,7 @@ UsersModels.prototype.add = function(name, password, callback) {
  
 }
 
-UsersModels.prototype.TESTAPI_resetFixture = function() {
+UsersModel.prototype.TESTAPI_resetFixture = function() {
   client.query('TRUNCATE testdb');
   
 }

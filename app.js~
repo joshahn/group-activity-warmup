@@ -4,11 +4,11 @@ var pg = require('pg');
 var userCount = 1;
 var app = express();
 
-var SUCCESS               =   1  # : a success
-var ERR_BAD_CREDENTIALS   =  -1  # : (for login only) cannot find the user/password pair in the database
-var ERR_USER_EXISTS       =  -2  # : (for add only) trying to add a user that already exists
-var ERR_BAD_USERNAME      =  -3  # : (for add, or login) invalid user name (only empty string is invalid for now)
-var ERR_BAD_PASSWORD      =  -4
+var SUCCESS               =   1;
+var ERR_BAD_CREDENTIALS   =  -1;
+var ERR_USER_EXISTS       =  -2;
+var ERR_BAD_USERNAME      =  -3;
+var ERR_BAD_PASSWORD      =  -4;
 
 
 app.configure(function(){
@@ -31,6 +31,12 @@ app.configure('production', function(){
 
 var usersModel = new UsersModel();
 
+app.get('/', function(req, res) {
+  res.render('client.jade', {title: "Login"});
+
+});
+
+
 app.post('/users/login', function(req, res) {
   var reqHandle = JSON.parse(req);
   var resHandle = JSON.parse(res);
@@ -39,13 +45,12 @@ app.post('/users/login', function(req, res) {
   
   var rval = usersModel.login(username, password);
   if (rval < 0) {
-    response = { "errCode" : rval }
+    response = { "errCode" : rval };
   } else {
-    response = { "errCode" : SUCESS
-		  "count" : rval }
+    response = { "errCode" : SUCESS, "count" : rval };
   }
   res.send(response);
-}
+});
 
 app.post('/users/add', function(req, res) {
   var reqHandle = JSON.parse(req);
@@ -56,23 +61,22 @@ app.post('/users/add', function(req, res) {
   
   var rval = usersModel.add(username, password);
   if (rval < 0) {
-    response = {"errCode" : rval}
+    response = {"errCode" : rval};
     
   } else {
-    response = {"errCode" : SUCESS
-		"count" : rval }
+    response = {"errCode" : SUCESS,
+		"count" : rval };
   }
   res.send(response);
-}  
+});  
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
   var reqHandle = JSON.parse(req);
   var resHandle = JSON.parse(res);
 
   usersModel.TESTAPI_resetFixture();
-  response = {"errCode"}
+  response = {"errCode"};
   res.send(response); 
-}
-
+});
 
 app.listen(3000);

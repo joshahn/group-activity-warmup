@@ -1,8 +1,8 @@
-var SUCCESS               =   1  # : a success
-var ERR_BAD_CREDENTIALS   =  -1  # : (for login only) cannot find the user/password pair in the database
-var ERR_USER_EXISTS       =  -2  # : (for add only) trying to add a user that already exists
-var ERR_BAD_USERNAME      =  -3  # : (for add, or login) invalid user name (only empty string is invalid for now)
-var ERR_BAD_PASSWORD      =  -4
+var SUCCESS               =   1;
+var ERR_BAD_CREDENTIALS   =  -1;
+var ERR_USER_EXISTS       =  -2;
+var ERR_BAD_USERNAME      =  -3;
+var ERR_BAD_PASSWORD      =  -4;
 
 UsersModels = function() {};
 
@@ -48,7 +48,7 @@ UsersModels.prototype.add = function(name, password, callback) {
   if (username != null) {
     return ERR_USER_EXISTS;
   }
-  if ((name == "") && (name.length > MAX_USERNAME_LENGTH) {
+  if ((name == "") && (name.length > MAX_USERNAME_LENGTH)) {
     return ERR_BAD_USERNAME;
   }
   if (psswrd.length <= MAX_PASSWORD_LENGTH) {
