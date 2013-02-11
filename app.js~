@@ -72,7 +72,7 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
   usersModel.TESTAPI_resetFixture();
   response = {"errCode"}
   res.send(response); 
-
+}
 
 
 app.listen(3000);

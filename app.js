@@ -31,6 +31,10 @@ app.configure('production', function(){
 
 var usersModel = new UsersModel();
 
+app.get('/'. function(req, res) {
+  res.render('client.jade', {title: "Login"});
+}
+
 app.post('/users/login', function(req, res) {
   var reqHandle = JSON.parse(req);
   var resHandle = JSON.parse(res);
