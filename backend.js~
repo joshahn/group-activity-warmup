@@ -42,6 +42,7 @@ UsersModel.prototype.login = function(user, password, callback) {
   // ALL CLEAR!
   count += 1;
   callback(null, count);
+  }
 };
 
 UsersModel.prototype.add = function(name, password, callback) {
