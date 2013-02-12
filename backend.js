@@ -10,14 +10,14 @@ var MAX_USERNAME_LENGTH = 128;
 var MAX_PASSWORD_LENGTH = 128;
 
 var pg = require('pg');
-var connection = new pg.Client(process.env.HEROKU_POSTGRESQL_CHARCOAL_URL);
+var connection = new pg.Client(process.env.HEROKU_POSTGRESQL_CHARCOAL_RURL || "tcp://postgres:1234@localhost/postgres");
 connection.connect();
 
 UsersModel.prototype.login = function(user, password, callback) {
   
-  var userQuery = client.query('SELECT * FROM testdb WHERE username = $u', [user]);
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $u', [user]);
   
-  query.on('row', function(row) {
+  userQuery.on('row', function(row) {
     var username = row.username;
     var psswrd = row.password;
     var count = row.count;
@@ -38,8 +38,8 @@ UsersModel.prototype.login = function(user, password, callback) {
 }
 
 UsersModel.prototype.add = function(name, password, callback) {
-  var userQuery = client.query('SELECT * FROM testdb WHERE username = $u', [name]);
-  query.on('row', function(row) {
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $u', [name]);
+  userQuery.on('row', function(row) {
     var username = row.username;
     var psswrd = row.password;
     var count = row.count;
@@ -54,13 +54,13 @@ UsersModel.prototype.add = function(name, password, callback) {
   if (psswrd.length <= MAX_PASSWORD_LENGTH) {
     return ERR_BAD_PASSWORD;
   }
-  var userQuery = client.query('INSERT INTO testdb(username, password, count) VALUES ($n, $p, $c))', [name, password, 1]);
+  connection.query('INSERT INTO testdb(username, password, count) VALUES ($n, $p, $c))', [name, password, 1]);
   callback(null, 1);
  
 }
 
 UsersModel.prototype.TESTAPI_resetFixture = function() {
-  client.query('TRUNCATE testdb');
+  connection.query('TRUNCATE testdb');
   
 }
 
