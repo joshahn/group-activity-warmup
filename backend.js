@@ -18,7 +18,7 @@ UsersModel.prototype.login = function(user, password, callback) {
   var psswrd = null;
   var count = 0;
   console.log("woot");
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [user], function(error, results) {
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [user], function(error, results) {
     username = results.row.username;
     psswrd = results.row.password;
     count = results.row.count;
@@ -55,7 +55,7 @@ UsersModel.prototype.add = function(name, password, callback) {
   var username = null;
   var psswrd = null;
   var count = 0;
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [name], function(error, results) {
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [name], function(error, results) {
     username = results.row.username;
     psswrd = results.row.password;
     count = results.row.count;
@@ -79,11 +79,11 @@ UsersModel.prototype.add = function(name, password, callback) {
       status = ERR_USER_EXISTS;
     }
   }
-  connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3))', [name, password, 1]);
+  connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3));', [name, password, 1]);
   callback(null, status);
 };
 
 UsersModel.prototype.TESTAPI_resetFixture = function() {
-  connection.query('TRUNCATE testdb');
+  connection.query('TRUNCATE testdb;');
   
 };

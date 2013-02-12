@@ -18,7 +18,7 @@ UsersModel.prototype.login = function(user, password, callback) {
   var psswrd = null;
   var count = 0;
   console.log("woot");
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [user], function(error, results) {
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [user], function(error, results) {
     username = results.row.username;
     psswrd = results.row.password;
     count = results.row.count;
