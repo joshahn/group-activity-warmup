@@ -2,7 +2,8 @@ var express = require('express');
 var ArticleProvider = require('./backend').UsersModel;
 var pg = require('pg');
 var userCount = 1;
-var app = express();
+var express = express();
+var app = express.createServer(express.logger());
 
 var SUCCESS               =   1;
 var ERR_BAD_CREDENTIALS   =  -1;
