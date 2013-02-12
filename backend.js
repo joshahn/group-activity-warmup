@@ -17,6 +17,7 @@ UsersModel.prototype.login = function(user, password, callback) {
   var username = null;
   var psswrd = null;
   var count = 0;
+  console.log("gonna do query now");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [user], function(error, results) {
     console.log("results:" + results);
     username = results.row.username;
