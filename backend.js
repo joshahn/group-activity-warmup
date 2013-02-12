@@ -17,13 +17,14 @@ UsersModel.prototype.login = function(user, password, callback) {
   var username = null;
   var psswrd = null;
   var count = 0;
-  
+  console.log("woot");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [user], function(error, results) {
     var username = results.row.username;
     var psswrd = results.row.password;
     var count = results.row.count;
   });
-
+  
+  console.log("woot2");
   /*
   userQuery.on('row', function(row) {
     var username = row.username;
