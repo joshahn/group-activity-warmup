@@ -75,7 +75,7 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
   var resHandle = JSON.parse(res);
 
   usersModel.TESTAPI_resetFixture();
-  response = {"errCode"};
+  response = {"errCode" : SUCCESS};
   res.send(response); 
 });
 

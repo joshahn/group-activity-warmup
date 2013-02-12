@@ -10,7 +10,7 @@ var ERR_USER_EXISTS       =  -2;
 var ERR_BAD_USERNAME      =  -3;
 var ERR_BAD_PASSWORD      =  -4;
 
-
+/*
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -28,7 +28,7 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
-
+*/
 var usersModel = new UsersModel();
 
 app.get('/', function(req, res) {
