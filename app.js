@@ -4,13 +4,15 @@ var pg = require('pg');
 var userCount = 1;
 var app = express();
 
+
+
 var SUCCESS               =   1;
 var ERR_BAD_CREDENTIALS   =  -1;
 var ERR_USER_EXISTS       =  -2;
 var ERR_BAD_USERNAME      =  -3;
 var ERR_BAD_PASSWORD      =  -4;
 
-/*
+
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -18,7 +20,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/'));
 });
 
 app.configure('development', function(){
@@ -28,11 +30,11 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
-*/
+
 var usersModel = new UsersModel();
 
 app.get('/', function(req, res) {
-  res.send("Hello World");
+  res.render('client.jade', {title: 'LOGIN'});
 });
 
 
@@ -42,31 +44,33 @@ app.post('/users/login', function(req, res) {
   var username = reqHandle[user];
   var password = reqHandle[user];
   
-  var rval = usersModel.login(username, password);
-  if (rval < 0) {
-    response = { "errCode" : rval };
-  } else {
-    response = { "errCode" : SUCESS, "count" : rval };
-  }
-  res.send(response);
+  usersModel.login(username, password, function(error, loginStatus) {
+    if (loginStatus < 0) {
+      response = { "errCode" : loginStatus };
+    } else {
+      response = { "errCode" : SUCESS, "count" : loginStatus };
+    }
+    res.send(response);
+  });  
 });
-
+  
 app.post('/users/add', function(req, res) {
-  var reqHandle = JSON.parse(req);
-  var resHandle = JSON.parse(res);
   
-  var username = reqHandle[user]
-  var password = reqHandle[user];
+  var username = req.body.user;
+  var password = req.body.password;
   
-  var rval = usersModel.add(username, password);
-  if (rval < 0) {
-    response = {"errCode" : rval};
+  usersModel.add(username, password, function(error, addStatus) {
+    if (addStatus < 0) {
+      response = {"errCode" : addStatus};
+      
+    } else {
+      response = {"errCode" : SUCCESS, "count" : addStatus };
+      
+    }
+    res.send(response);
     
-  } else {
-    response = {"errCode" : SUCESS,
-		"count" : rval };
-  }
-  res.send(response);
+  });
+
 });  
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
@@ -78,4 +82,4 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
   res.send(response); 
 });
 
-app.listen(3000);
+app.listen(8000);

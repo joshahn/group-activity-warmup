@@ -10,59 +10,69 @@ var MAX_USERNAME_LENGTH = 128;
 var MAX_PASSWORD_LENGTH = 128;
 
 var pg = require('pg');
-var connection = new pg.Client(process.env.DATABASE_URL || "tcp://postgres:1234@localhost/postgres", function(err, client));
+var connection = new pg.Client(process.env.DATABASE_URL || "tcp://postgres:1234@localhost/postgres");
 connection.connect();
 
 UsersModel.prototype.login = function(user, password, callback) {
   
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $u', [user]);
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [user]);
+  var username = null;
+  var psswrd = null;
+  var count = 0;
   
   userQuery.on('row', function(row) {
     var username = row.username;
     var psswrd = row.password;
     var count = row.count;
   });
+  
+  var status = count;
   
   // not in database
   if (username == null) {
-    return ERR_BAD_CREDENTIALS;
+    status = ERR_BAD_CREDENTIALS;
   }
-
   if (password != psswrd) {
-    return ERR_BAD_CREDENTIALS;
+    status = ERR_BAD_CREDENTIALS;
   }
   
+  if (status < 0) {
+    callback(null, status);
+  } else {
   // ALL CLEAR!
   count += 1;
   callback(null, count);
-}
+};
 
 UsersModel.prototype.add = function(name, password, callback) {
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $u', [name]);
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [name]);
+  console.log(userQuery);
+  var username = null;
+  var psswrd = null;
+  var count = 0;
   userQuery.on('row', function(row) {
-    var username = row.username;
-    var psswrd = row.password;
-    var count = row.count;
+    username = row.username;
+    psswrd = row.password;
+    count = row.count;
   });
   
+  var status = 1;
+  
   if (username != null) {
-    return ERR_USER_EXISTS;
+    if ((username == "") && (username.length > MAX_USERNAME_LENGTH)) {
+      status = ERR_BAD_USERNAME;
+    }
+    if (psswrd.length <= MAX_PASSWORD_LENGTH) {
+      status = ERR_BAD_PASSWORD;
+    } else {
+      status = ERR_USER_EXISTS;
+    }
   }
-  if ((name == "") && (name.length > MAX_USERNAME_LENGTH)) {
-    return ERR_BAD_USERNAME;
-  }
-  if (psswrd.length <= MAX_PASSWORD_LENGTH) {
-    return ERR_BAD_PASSWORD;
-  }
-  connection.query('INSERT INTO testdb(username, password, count) VALUES ($n, $p, $c))', [name, password, 1]);
-  callback(null, 1);
- 
-}
+  connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3))', [name, password, 1]);
+  callback(null, status);
+};
 
 UsersModel.prototype.TESTAPI_resetFixture = function() {
   connection.query('TRUNCATE testdb');
   
-}
-
-
-
+};
