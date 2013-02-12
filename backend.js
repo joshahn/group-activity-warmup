@@ -14,18 +14,23 @@ var connection = new pg.Client(process.env.HEROKU_POSTGRESQL_CHARCOAL_URL || "tc
 connection.connect();
 
 UsersModel.prototype.login = function(user, password, callback) {
-  
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [user]);
   var username = null;
   var psswrd = null;
   var count = 0;
   
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [user], function(error, results) {
+    var username = results.row.username;
+    var psswrd = results.row.password;
+    var count = results.row.count;
+  });
+
+  /*
   userQuery.on('row', function(row) {
     var username = row.username;
     var psswrd = row.password;
     var count = row.count;
   });
-  
+*/  
   var status = count;
   
   // not in database
@@ -46,17 +51,21 @@ UsersModel.prototype.login = function(user, password, callback) {
 };
 
 UsersModel.prototype.add = function(name, password, callback) {
-  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [name]);
-  console.log(userQuery);
   var username = null;
   var psswrd = null;
   var count = 0;
+  var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [name], function(error, results) {
+    username = row.username;
+    psswrd = row.password;
+    count = row.count;
+  });
+  /*
   userQuery.on('row', function(row) {
     username = row.username;
     psswrd = row.password;
     count = row.count;
   });
-  
+  */
   var status = 1;
   
   if (username != null) {
