@@ -32,8 +32,7 @@ app.configure('production', function(){
 var usersModel = new UsersModel();
 
 app.get('/', function(req, res) {
-  res.render('client.jade', {title: "Login"});
-
+  res.send("Hello World");
 });
 
 
