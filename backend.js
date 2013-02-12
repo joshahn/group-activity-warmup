@@ -56,9 +56,9 @@ UsersModel.prototype.add = function(name, password, callback) {
   var psswrd = null;
   var count = 0;
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1', [name], function(error, results) {
-    username = row.username;
-    psswrd = row.password;
-    count = row.count;
+    username = results.row.username;
+    psswrd = results.row.password;
+    count = results.row.count;
   });
   /*
   userQuery.on('row', function(row) {
