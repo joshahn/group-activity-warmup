@@ -45,10 +45,10 @@ app.post('/users/login', function(req, res) {
   var password = reqHandle[user];
   
   usersModel.login(username, password, function(error, loginStatus) {
-    if (rval < 0) {
-      response = { "errCode" : rval };
+    if (loginStatus < 0) {
+      response = { "errCode" : loginStatus };
     } else {
-      response = { "errCode" : SUCESS, "count" : rval };
+      response = { "errCode" : SUCESS, "count" : loginStatus };
     }
     res.send(response);
   });  
