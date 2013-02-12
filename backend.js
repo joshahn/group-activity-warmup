@@ -10,7 +10,7 @@ var MAX_USERNAME_LENGTH = 128;
 var MAX_PASSWORD_LENGTH = 128;
 
 var pg = require('pg');
-var connection = new pg.Client(process.env.DATABASE_URL || "tcp://postgres:1234@localhost/postgres", function(err, client));
+var connection = new pg.Client(process.env.DATABASE_URL || "tcp://postgres:1234@localhost/postgres");
 connection.connect();
 
 UsersModel.prototype.login = function(user, password, callback) {
