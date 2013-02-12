@@ -1,9 +1,8 @@
 var express = require('express');
-var ArticleProvider = require('./backend').UsersModel;
+var usersModel = require('./backend').UsersModel;
 var pg = require('pg');
 var userCount = 1;
 var app = express();
-
 
 
 var SUCCESS               =   1;
@@ -18,7 +17,7 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(require('stylus').middleware({ src: __dirname + '/public' }));
+  app.use(require('stylus').middleware({ src: __dirname + '/' }));
   app.use(app.router);
   app.use(express.static(__dirname + '/'));
 });

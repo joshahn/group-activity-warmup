@@ -1,9 +1,8 @@
 var express = require('express');
-var ArticleProvider = require('./backend').UsersModel;
+var usersModel = require('./backend').UsersModel;
 var pg = require('pg');
 var userCount = 1;
 var app = express();
-
 
 
 var SUCCESS               =   1;
