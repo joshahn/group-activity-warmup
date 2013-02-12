@@ -82,4 +82,5 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
   res.send(response); 
 });
 
-app.listen(8000);
+var port = process.env.PORT || 8888;
+app.listen(port);
