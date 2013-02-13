@@ -77,10 +77,10 @@ UsersModel.prototype.add = function(name, password, callback) {
       if (psswrd.length > MAX_PASSWORD_LENGTH) {
         status = ERR_BAD_PASSWORD;
       }
+      console.log("adding the info to db");
+      connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3);', [name, password, 1]);
+      console.log("added, return: " + status);
     }
-    console.log("adding the info to db");
-    connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3);', [name, password, 1]);
-    console.log("added, return: " + status);
     callback(null, status);
     
     });
