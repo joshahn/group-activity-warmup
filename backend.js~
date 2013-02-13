@@ -43,6 +43,7 @@ UsersModel.prototype.login = function(user, password, callback) {
       } else {
       // ALL CLEAR!
       count += 1;
+      connection.query('UPDATE testdb SET count = count + 1 WHERE username = $1;', [user]);
       }
     }
     callback(null, count);
@@ -76,10 +77,10 @@ UsersModel.prototype.add = function(name, password, callback) {
       console.log("found: " + username + " " + psswrd + " " + count);
     
       var status = 1;
-      if ((username == "") && (username.length > MAX_USERNAME_LENGTH)) {
+      if ((name == "") && (name.length > MAX_USERNAME_LENGTH)) {
 	status = ERR_BAD_USERNAME;
       }
-      if (psswrd.length > MAX_PASSWORD_LENGTH) {
+      if (password.length > MAX_PASSWORD_LENGTH) {
         status = ERR_BAD_PASSWORD;
       }
       console.log("adding the info to db");

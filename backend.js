@@ -69,18 +69,18 @@ UsersModel.prototype.add = function(name, password, callback) {
     console.log("results.rows: " + results.rows[0]);
     if (results.rows[0] !== undefined) {
       status = ERR_USER_EXISTS
-    }else {
       var resultsTable = results.rows[0];
       username = resultsTable.username;
       psswrd = resultsTable.password;
       count = resultsTable.count;
       console.log("found: " + username + " " + psswrd + " " + count);
+    }else {
     
       var status = 1;
-      if ((username == "") && (username.length > MAX_USERNAME_LENGTH)) {
+      if ((name == "") && (name.length > MAX_USERNAME_LENGTH)) {
 	status = ERR_BAD_USERNAME;
       }
-      if (psswrd.length > MAX_PASSWORD_LENGTH) {
+      if (password.length > MAX_PASSWORD_LENGTH) {
         status = ERR_BAD_PASSWORD;
       }
       console.log("adding the info to db");
