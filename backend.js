@@ -62,7 +62,7 @@ UsersModel.prototype.add = function(name, password, callback) {
     username = results.rows.username;
     psswrd = results.rows.password;
     count = results.rows.count;
-    console.log("did query: ");
+    console.log("did query: " + username + " " + psswrd + " " + count);
   });
   /*
   userQuery.on('row', function(row) {
