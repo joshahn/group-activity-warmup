@@ -38,10 +38,9 @@ app.get('/', function(req, res) {
 
 
 app.post('/users/login', function(req, res) {
-  var reqHandle = JSON.parse(req);
-  var resHandle = JSON.parse(res);
-  var username = reqHandle[user];
-  var password = reqHandle[user];
+  
+  var username = req.body.user;
+  var password = req.body.password;
   
   usersModel.login(username, password, function(error, loginStatus) {
     if (loginStatus < 0) {
