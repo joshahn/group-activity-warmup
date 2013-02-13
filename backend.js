@@ -25,9 +25,9 @@ UsersModel.prototype.login = function(user, password, callback) {
     if (resultsTable === undefined) {
       status = ERR_BAD_CREDENTIALS;
     } else {
-      username = resultsTable.rows.username;
-      psswrd = resultsTable.rows.password;
-      count = resultsTable.rows.count;
+      username = resultsTable.username;
+      psswrd = resultsTable.password;
+      count = resultsTable.count;
       console.log("here are the results of the login query: " + username + " " + psswrd + " " + count);
       
       // not in database

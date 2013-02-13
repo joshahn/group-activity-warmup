@@ -28,7 +28,7 @@ UsersModel.prototype.login = function(user, password, callback) {
       username = resultsTable.rows.username;
       psswrd = resultsTable.rows.password;
       count = resultsTable.rows.count;
-      console.log("here are the results of the login query: " + username + " " + psswrd + " " count);
+      console.log("here are the results of the login query: " + username + " " + psswrd + " " + count);
       
       // not in database
       if (username == null) {
