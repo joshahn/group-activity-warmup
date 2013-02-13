@@ -65,7 +65,7 @@ UsersModel.prototype.add = function(name, password, callback) {
     username = resultsTable.username;
     psswrd = resultsTable.password;
     count = resultsTable.count;
-    console.log("found: " + username + " " + psswrd + " " + count);
+    console.log("foundt: " + username + " " + psswrd + " " + count);
     
     var status = 1;
     if (username != null) {
