@@ -85,6 +85,7 @@ UsersModel.prototype.add = function(name, password, callback) {
   }
   console.log("adding the info to db");
   connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3);', [name, password, 1]);
+  console.log("added, return: " + status);
   callback(null, status);
 };
 
