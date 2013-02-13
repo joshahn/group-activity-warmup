@@ -61,16 +61,16 @@ UsersModel.prototype.add = function(name, password, callback) {
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [name], function(error, results) {
     console.log("these are the find results: " + results);
     console.log("results.rows: " + results.rows[0]);
-    var resultsTable = results.rows[0];
-    username = resultsTable.username;
-    psswrd = resultsTable.password;
-    count = resultsTable.count;
-    console.log("found: " + username + " " + psswrd + " " + count);
+    if (results.rows[0] !== undefined) {
+      status = ERR_USER_EXISTS
+    }else {
+      var resultsTable = results.rows[0];
+      username = resultsTable.username;
+      psswrd = resultsTable.password;
+      count = resultsTable.count;
+      console.log("found: " + username + " " + psswrd + " " + count);
     
-    var status = 1;
-    if (username != null) {
-      status = ERR_USER_EXISTS;
-    } else {
+      var status = 1;
       if ((username == "") && (username.length > MAX_USERNAME_LENGTH)) {
 	status = ERR_BAD_USERNAME;
       }
