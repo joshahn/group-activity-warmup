@@ -46,7 +46,7 @@ app.post('/users/login', function(req, res) {
     if (loginStatus < 0) {
       response = { "errCode" : loginStatus };
     } else {
-      response = { "errCode" : SUCESS, "count" : loginStatus };
+      response = { "errCode" : SUCCESS, "count" : loginStatus };
     }
     res.send(response);
   });  
