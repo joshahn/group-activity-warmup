@@ -20,9 +20,9 @@ UsersModel.prototype.login = function(user, password, callback) {
   console.log("gonna do query now");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [user], function(error, results) {
     console.log("results:" + results);
-    username = results.row.username;
-    psswrd = results.row.password;
-    count = results.row.count;
+    username = results.rows.username;
+    psswrd = results.rows.password;
+    count = results.rows.count;
   });
   
   console.log("woot2");
@@ -83,6 +83,7 @@ UsersModel.prototype.add = function(name, password, callback) {
       status = ERR_USER_EXISTS;
     }
   }
+  console.log("adding the info to db");
   connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3));', [name, password, 1]);
   callback(null, status);
 };
