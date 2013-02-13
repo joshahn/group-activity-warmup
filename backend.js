@@ -43,8 +43,9 @@ UsersModel.prototype.login = function(user, password, callback) {
       } else {
       // ALL CLEAR!
       count += 1;
-    callback(null, count);
+      }
     }
+    callback(null, count);
     
   });
     /*
