@@ -20,7 +20,7 @@ UsersModel.prototype.login = function(user, password, callback) {
   var status = count;
   console.log("gonna do login query now");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [user], function(error, results) {
-    console.log("results of login query:" + results);
+    console.log("results of login query:" + results.rows[0]);
     var resultsTable = results.rows[0];
     if (resultsTable === undefined) {
       status = ERR_BAD_CREDENTIALS;
@@ -65,15 +65,16 @@ UsersModel.prototype.add = function(name, password, callback) {
   var count = 0;
   console.log("finding the username");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [name], function(error, results) {
-    console.log("these are the find results: " + results);
-    console.log("results.rows: " + results.rows[0]);
+    console.log("the results.rows: " + results.rows[0]);
     if (results.rows[0] !== undefined) {
       status = ERR_USER_EXISTS
+      /*
       var resultsTable = results.rows[0];
       username = resultsTable.username;
       psswrd = resultsTable.password;
       count = resultsTable.count;
       console.log("found: " + username + " " + psswrd + " " + count);
+    */
     }else {
     
       var status = 1;
