@@ -23,6 +23,25 @@ UsersModel.prototype.login = function(user, password, callback) {
     username = results.rows.username;
     psswrd = results.rows.password;
     count = results.rows.count;
+    
+    var status = count;
+  
+    // not in database
+    if (username == null) {
+      status = ERR_BAD_CREDENTIALS;
+    }
+    if (password != psswrd) {
+      status = ERR_BAD_CREDENTIALS;
+    }
+  
+    if (status < 0) {
+      callback(null, status);
+    } else {
+    // ALL CLEAR!
+    count += 1;
+    callback(null, count);
+    }
+    
   });
     /*
   userQuery.on('row', function(row) {
@@ -31,23 +50,7 @@ UsersModel.prototype.login = function(user, password, callback) {
     var count = row.count;
   });
 */  
-  var status = count;
-  
-  // not in database
-  if (username == null) {
-    status = ERR_BAD_CREDENTIALS;
-  }
-  if (password != psswrd) {
-    status = ERR_BAD_CREDENTIALS;
-  }
-  
-  if (status < 0) {
-    callback(null, status);
-  } else {
-  // ALL CLEAR!
-  count += 1;
-  callback(null, count);
-  }
+
 };
 
 UsersModel.prototype.add = function(name, password, callback) {
@@ -61,7 +64,24 @@ UsersModel.prototype.add = function(name, password, callback) {
     psswrd = results.rows.password;
     count = results.rows.count;
     console.log("found: " + username + " " + psswrd + " " + count);
-  });
+    
+    var status = 1;
+    if (username != null) {
+      if ((username == "") && (username.length > MAX_USERNAME_LENGTH)) {
+	status = ERR_BAD_USERNAME;
+      }
+      if (psswrd.length <= MAX_PASSWORD_LENGTH) {
+        status = ERR_BAD_PASSWORD;
+      } else {
+	status = ERR_USER_EXISTS;
+      }
+    }
+    console.log("adding the info to db");
+    connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3);', [name, password, 1]);
+    console.log("added, return: " + status);
+    callback(null, status);
+    
+    });
   /*
   userQuery.on('row', function(row) {
     username = row.username;
@@ -69,22 +89,7 @@ UsersModel.prototype.add = function(name, password, callback) {
     count = row.count;
   });
   */
-  var status = 1;
-  
-  if (username != null) {
-    if ((username == "") && (username.length > MAX_USERNAME_LENGTH)) {
-      status = ERR_BAD_USERNAME;
-    }
-    if (psswrd.length <= MAX_PASSWORD_LENGTH) {
-      status = ERR_BAD_PASSWORD;
-    } else {
-      status = ERR_USER_EXISTS;
-    }
-  }
-  console.log("adding the info to db");
-  connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3);', [name, password, 1]);
-  console.log("added, return: " + status);
-  callback(null, status);
+
 };
 
 UsersModel.prototype.TESTAPI_resetFixture = function() {
