@@ -23,6 +23,25 @@ UsersModel.prototype.login = function(user, password, callback) {
     username = results.rows.username;
     psswrd = results.rows.password;
     count = results.rows.count;
+    
+    var status = count;
+  
+    // not in database
+    if (username == null) {
+      status = ERR_BAD_CREDENTIALS;
+    }
+    if (password != psswrd) {
+      status = ERR_BAD_CREDENTIALS;
+    }
+  
+    if (status < 0) {
+      callback(null, status);
+    } else {
+    // ALL CLEAR!
+    count += 1;
+    callback(null, count);
+    }
+    
   });
     /*
   userQuery.on('row', function(row) {
@@ -31,23 +50,7 @@ UsersModel.prototype.login = function(user, password, callback) {
     var count = row.count;
   });
 */  
-  var status = count;
-  
-  // not in database
-  if (username == null) {
-    status = ERR_BAD_CREDENTIALS;
-  }
-  if (password != psswrd) {
-    status = ERR_BAD_CREDENTIALS;
-  }
-  
-  if (status < 0) {
-    callback(null, status);
-  } else {
-  // ALL CLEAR!
-  count += 1;
-  callback(null, count);
-  }
+
 };
 
 UsersModel.prototype.add = function(name, password, callback) {
