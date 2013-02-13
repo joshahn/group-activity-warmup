@@ -17,16 +17,14 @@ UsersModel.prototype.login = function(user, password, callback) {
   var username = null;
   var psswrd = null;
   var count = 0;
-  console.log("gonna do query now");
+  console.log("gonna do login query now");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [user], function(error, results) {
-    console.log("results:" + results);
+    console.log("results of login query:" + results);
     username = results.rows.username;
     psswrd = results.rows.password;
     count = results.rows.count;
   });
-  
-  console.log("woot2");
-  /*
+    /*
   userQuery.on('row', function(row) {
     var username = row.username;
     var psswrd = row.password;
@@ -56,13 +54,13 @@ UsersModel.prototype.add = function(name, password, callback) {
   var username = null;
   var psswrd = null;
   var count = 0;
-  console.log("doing add query");
+  console.log("finding the username");
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [name], function(error, results) {
-    console.log("these are the results: " + results);
+    console.log("these are the find results: " + results);
     username = results.rows.username;
     psswrd = results.rows.password;
     count = results.rows.count;
-    console.log("did query: " + username + " " + psswrd + " " + count);
+    console.log("found: " + username + " " + psswrd + " " + count);
   });
   /*
   userQuery.on('row', function(row) {
@@ -85,6 +83,7 @@ UsersModel.prototype.add = function(name, password, callback) {
   }
   console.log("adding the info to db");
   connection.query('INSERT INTO testdb(username, password, count) VALUES ($1, $2, $3);', [name, password, 1]);
+  console.log("added, return: " + status);
   callback(null, status);
 };
 
