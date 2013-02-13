@@ -43,10 +43,11 @@ UsersModel.prototype.login = function(user, password, callback) {
       } else {
       // ALL CLEAR!
       count += 1;
+      status = count;
       connection.query('UPDATE testdb SET count = count + 1 WHERE username = $1;', [user]);
       }
     }
-    callback(null, count);
+    callback(null, status);
     
   });
     /*

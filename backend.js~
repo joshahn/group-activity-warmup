@@ -67,7 +67,7 @@ UsersModel.prototype.add = function(name, password, callback) {
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [name], function(error, results) {
     console.log("the results.rows: " + results.rows[0]);
     if (results.rows[0] !== undefined) {
-      status = ERR_USER_EXISTS
+      status = ERR_USER_EXISTS;
       /*
       var resultsTable = results.rows[0];
       username = resultsTable.username;
