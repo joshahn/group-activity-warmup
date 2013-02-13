@@ -61,9 +61,10 @@ UsersModel.prototype.add = function(name, password, callback) {
   var userQuery = connection.query('SELECT * FROM testdb WHERE username = $1;', [name], function(error, results) {
     console.log("these are the find results: " + results);
     console.log("results.rows: " + results.rows[0]);
-    username = results.rows.username;
-    psswrd = results.rows.password;
-    count = results.rows.count;
+    var resultsTable = results.rows[0];
+    username = resultsTable.username;
+    psswrd = resultsTable.password;
+    count = resultsTable.count;
     console.log("found: " + username + " " + psswrd + " " + count);
     
     var status = 1;
