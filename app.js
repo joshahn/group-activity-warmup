@@ -72,13 +72,23 @@ app.post('/users/add', function(req, res) {
 });  
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
-  var reqHandle = JSON.parse(req);
-  var resHandle = JSON.parse(res);
-
-  usersModel.TESTAPI_resetFixture();
-  response = {"errCode" : SUCCESS};
-  res.send(response); 
+  usersModel.TESTAPI_resetFixture(function(error, status) {
+    response = {"errCode" : status};
+    res.send(response);
+  });
 });
+
+var UnitTest = require('./test/unitTesting').TestCases;
+var unitTest = new TestCases();
+app.post('/TESTAPI/unitTests', function(req, res) {
+  unitTest.TESTAPI_unitTests(function(testRan, failedTests, outputs) {
+    response = {"totalTests" : testRan,
+		"nrFailed" : failedTests,
+		"output" : outputs };
+    res.send(response);
+  });
+});
+
 
 var port = process.env.PORT || 8888;
 app.listen(port);
