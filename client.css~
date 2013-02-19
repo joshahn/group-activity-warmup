@@ -40,20 +40,21 @@
   margin-right:auto;
   text-align: center;
 }
-  
+
+
+body {
+	width: 600px;
+}  
 }
 
+
 .box {
-    width: 600px;
-    height: 450px;
     margin-left:auto;
     margin-right:auto;
 }
 
 .message {
 
-    margin: 20px 30px 20px 30px;
-    font-size: 15px;
     margin-left:auto;
     margin-right:auto;
     text-align: center;
@@ -80,7 +81,5 @@
 }
 
 
-body {
-	width: 600px;
-}
+
 
