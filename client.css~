@@ -2,21 +2,42 @@
 
 
 .box {
-    width: 300px;
-    height: 200px;
-    border: thin black solid;
-    background-color: rgb(243,243,243);
+    width: 600px;
+    height: 450px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .message {
-    margin: 100px 120px 100px 120px;
-    border: thin black solid;
-    margin: 0 15px 0 0;
-    right: 0;
+    
+    margin: 20px 30px 20px 30px;
+    font-size: 15px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+
+.ui-btn-inner {
+  width: 150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+}
+
+
+
+.button-row {
+  width: 450px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#logout-button {
+  width: 210px;
 }
 
 body {
-	font-family: 'Helvetica Neue Light', HelveticaNeue-Light, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	
+	width: 600px;
 }
 

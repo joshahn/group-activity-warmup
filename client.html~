@@ -4,13 +4,14 @@
 	<title>My Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="client.css">
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="client.js"></script>
 </head>
 <body>
 
-<div data-role="page">
+<div data-role="page" data-theme="a">
 
 	<div data-role="header">
 		<h1>Josh's Warmup App</h1>
@@ -23,44 +24,43 @@
 
 
 	      <div data-role="fieldcontain" class="ui-hide-label">
-		  <label for="username">Username:</label>
+		  <label for="username"></label>
 		  <input type="text" name="name" id="login-username" value="" placeholder="Username" />
 	      </div>
 
 	      <div data-role="fieldcontain" class="ui-hide-label">
-		  <label for="password">Password:</label>
+		  <label for="password"></label>
 		  <input type="password" name="name" id="login-password" value="" placeholder="Password" />
 	      </div>
-	      
-	    </div><!--login-page-->
 
-	      
-	      <fieldset class="ui-grid-a">
-		<div class="block-a">
-		  <a href="#" id="login-button" data-role="button" type="submit">Login</a></div>
-		<div class="block-b">
-		  <a href="#" id="add-user-button" data-role="button" type="submit">Add User</a></div>
-	      </fieldset><!-- /grid-a -->
+	      <div class="button-row">
+		<fieldset class="ui-grid-a">
+		  <div class="ui-block-a">
+		    <input id="login-button" type="submit" value="Login" data-inline="true" data-icon="check" data-theme="b">
+		    </div>
+		  <div class="ui-block-b">
+		    <input id="add-user-button" type="submit" value="Add User" data-inline="true" data-icon="plus">
+		    </div>
+		</div><!-- button-row-->
+	      </div><!--login-page-->
 
 		
-	     
-	    
-	     
-
-
-
-
-
+		<!--
+		<a href="#" id="login-button" data-role="button" type="submit">Login</a>
+		<a href="#" id="add-user-button" data-role="button" type="submit">Add User</a>
+		-->
+	      
 
 	<div id="welcome-page" class="box">
 	  <div id="welcome-message" class="message"></div>
-	    <a href="#" id="logout-button" data-role="button" type="submit">Logout</a>
-	</div>
+	    <a href="#" id="logout-button" data-role="button" type="submit" data-icon="delete" data-theme="e">Logout</a>
+	</div><!-- welcome page -->
+
 
 	
       </div><!-- /content -->
 
-      
+
 
 </div><!-- /page -->
 
