@@ -1,5 +1,6 @@
 /* This file contains the style parameters for the sample client. */
 
+@media screen and (min-width: 600px) {
 
 .box {
     width: 600px;
@@ -9,7 +10,7 @@
 }
 
 .message {
-    
+
     margin: 20px 30px 20px 30px;
     font-size: 15px;
     margin-left:auto;
@@ -35,7 +36,14 @@
 
 #logout-button {
   width: 210px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
 }
+
+  
+}
+
 
 body {
 	width: 600px;
