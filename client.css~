@@ -34,12 +34,7 @@
   margin-right:auto;
 }
 
-#logout-button {.ui-btn-inner {
-  width: 150px;
-  margin-left:auto;
-  margin-right:auto;
-  text-align: center;
-}
+#logout-button {
   width: 210px;
   margin-left:auto;
   margin-right:auto;
@@ -65,12 +60,14 @@ body {
     text-align: center;
 }
 
+
 .ui-btn-inner {
   width: 60px;
   margin-left:auto;
   margin-right:auto;
   text-align: center;
 }
+
 
 #logout-button {
   margin-left:auto;
