@@ -9,8 +9,9 @@
 }
 
 .message {
-
-    margin: 20px 30px 20px 30px;
+    width: 480px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
     font-size: 15px;
     margin-left:auto;
     margin-right:auto;
@@ -40,11 +41,9 @@
   text-align: center;
 }
 
-
 body {
 	width: 600px;
 }
-
 }
 
 
