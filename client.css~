@@ -1,7 +1,6 @@
 /* This file contains the style parameters for the sample client. */
 
 @media screen and (min-width: 600px) {
-
 .box {
     width: 600px;
     height: 450px;
@@ -44,7 +43,8 @@
 
 body {
 	width: 600px;
-}  
+}
+
 }
 
 
@@ -60,9 +60,14 @@ body {
     text-align: center;
 }
 
+.button-row {
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+}
 
 .ui-btn-inner {
-  width: 60px;
+  width: 75px;
   margin-left:auto;
   margin-right:auto;
   text-align: center;

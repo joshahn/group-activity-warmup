@@ -1,7 +1,6 @@
 /* This file contains the style parameters for the sample client. */
 
 @media screen and (min-width: 600px) {
-
 .box {
     width: 600px;
     height: 450px;
@@ -44,7 +43,8 @@
 
 body {
 	width: 600px;
-}  
+}
+
 }
 
 
@@ -66,13 +66,14 @@ body {
   text-align: center;
 }
 
+@media screen and (max-width: 600px) {
 .ui-btn-inner {
   width: 75px;
   margin-left:auto;
   margin-right:auto;
   text-align: center;
 }
-
+}
 
 #logout-button {
   margin-left:auto;
