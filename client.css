@@ -40,8 +40,13 @@
   margin-right:auto;
   text-align: center;
 }
-  
+
+
+body {
+	width: 600px;
+}  
 }
+
 
 .box {
     width: 600px;
@@ -80,7 +85,5 @@
 }
 
 
-body {
-	width: 600px;
-}
+
 
