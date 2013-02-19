@@ -60,6 +60,13 @@ body {
     text-align: center;
 }
 
+.ui-btn-inner {
+  width: 150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+}
+
 #logout-button {
   margin-left:auto;
   margin-right:auto;
