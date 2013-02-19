@@ -1,6 +1,6 @@
 
 /**
- * list of all global variables
+ * List of all global variables
  */
 var SUCCESS               =   1;
 var ERR_BAD_CREDENTIALS   =  -1;
@@ -78,7 +78,7 @@ UsersModel.prototype.add = function(name, password, callback) {
       if ((name == '') || (name.length > MAX_USERNAME_LENGTH)) {
 	status = ERR_BAD_USERNAME;
       }
-      //invalid password with user
+      //invalid password with username
       else if (password.length > MAX_PASSWORD_LENGTH) {
         status = ERR_BAD_PASSWORD;
       } else {

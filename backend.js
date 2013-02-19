@@ -1,6 +1,5 @@
-
 /**
- * list of all global variables
+ * List of all global variables
  */
 var SUCCESS               =   1;
 var ERR_BAD_CREDENTIALS   =  -1;
