@@ -9,9 +9,10 @@
 }
 
 .message {
-    margin: 10px 20px 10px 20px;
+    margin: 100px 120px 100px 120px;
     border: thin black solid;
-
+    margin: 0 15px 0 0;
+    right: 0;
 }
 
 body {

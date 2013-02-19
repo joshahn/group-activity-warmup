@@ -84,7 +84,9 @@ $(document).ready(function() {
    state.  This makes them slightly slower, but has the side effect of 
    restoring any invariant that gets accidentally broken.*/
 function show_login_page(message) {
-  if(! message) message = "Please enter your credentials below";
+  if(! message) {
+    message = "Please enter your credentials below";
+  }
   $('#welcome-page').hide()
   $('#login-username').val("")
   $('#login-password').val("")
@@ -100,8 +102,8 @@ function show_welcome_page(user, count) {
 
 function handle_login_response(data, user) {
   if( data.errCode > 0 ) {
-     c = data.count;
-     show_welcome_page(user, c);
+     count = data.count;
+     show_welcome_page(user, count);
   } else {
      if( debug_flag ) {
         if( data.errCode != ERR_BAD_CREDENTIALS ) {
@@ -114,8 +116,8 @@ function handle_login_response(data, user) {
 
 function handle_add_user_response(data, user) {
   if( data.errCode > 0 ) {
-     c = data.count;
-     show_welcome_page(user, c);
+     count = data.count;
+     show_welcome_page(user, count);
   } else {
      if( debug_flag ) {
         if( data.errCode != ERR_BAD_USERNAME && data.errCode != ERR_USER_EXISTS ) {
